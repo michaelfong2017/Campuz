@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1098946808774",
+    "project_id": "campuz-cc522",
+    "storage_bucket": "campuz-cc522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098946808774:android:8f6a84539e85b098ff40c7",
+        "android_client_info": {
+          "package_name": "com.michael.campuz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098946808774-0mrcsp087l6e7u32ikc0s1k5gch8nvje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.michael.campuz",
+            "certificate_hash": "bde3dcd78bb7c3903149b104241bd5b4e8e914c0"
+          }
+        },
+        {
+          "client_id": "1098946808774-ht2kjt4ichosaqpsfi8le8t9fvmb4k1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6aTm8X2xbWCmR7IY73XgSt3SgCvKhQao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098946808774-ht2kjt4ichosaqpsfi8le8t9fvmb4k1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
