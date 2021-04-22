@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/option_login"
-        android:icon="@drawable/login"
+        android:icon="@drawable/ic_login"
         android:title="Login" />
 
 </menu>
