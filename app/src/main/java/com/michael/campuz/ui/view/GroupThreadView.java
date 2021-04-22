@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 
 import com.michael.campuz.R;
 
-public class StudyGroupThreadView extends LinearLayout {
-    public StudyGroupThreadView(Context context, @Nullable AttributeSet attrs) {
+public class GroupThreadView extends LinearLayout {
+    public GroupThreadView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     private void init() {
-        inflate(getContext(), R.layout.study_group_thread_layout,this);
+        inflate(getContext(), R.layout.group_thread_layout,this);
 
     }
 }

@@ -61,7 +61,7 @@ public class GuestDiscussionActivity extends AppCompatActivity {
                             case R.id.navigation_discussion: {
                                 break;
                             }
-                            case R.id.navigation_study_group: {
+                            case R.id.navigation_group: {
                                 break;
                             }
                             case R.id.navigation_resources: {

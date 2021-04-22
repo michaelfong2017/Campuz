@@ -19,7 +19,7 @@
             android:name=".ui.member.MemberDiscussionActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".ui.member.MemberStudyGroupActivity"
+            android:name=".ui.member.MemberGroupActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".ui.member.MemberResourcesActivity"

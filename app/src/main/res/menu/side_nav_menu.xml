@@ -7,9 +7,9 @@
         android:title="@string/title_discussion" />
 
     <item
-        android:id="@+id/navigation_study_group"
+        android:id="@+id/navigation_group"
         android:icon="@drawable/ic_baseline_group_24"
-        android:title="@string/title_study_group" />
+        android:title="@string/title_group" />
 
     <item
         android:id="@+id/navigation_resources"

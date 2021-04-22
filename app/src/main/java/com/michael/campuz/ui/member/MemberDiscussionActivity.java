@@ -3,33 +3,19 @@ package com.michael.campuz.ui.member;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.michael.campuz.R;
-import com.michael.campuz.ui.login.LoginActivity;
 import com.orhanobut.logger.Logger;
 
 
 public class MemberDiscussionActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-
-    /** Firebase google signin **/
-    FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        mAuth.addAuthStateListener(mAuthListener);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +39,8 @@ public class MemberDiscussionActivity extends AppCompatActivity {
                             case R.id.navigation_discussion: {
                                 break;
                             }
-                            case R.id.navigation_study_group: {
-                                Intent intent = new Intent(MemberDiscussionActivity.this, MemberStudyGroupActivity.class);
+                            case R.id.navigation_group: {
+                                Intent intent = new Intent(MemberDiscussionActivity.this, MemberGroupActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 break;
@@ -101,6 +87,11 @@ public class MemberDiscussionActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        /** Title **/
+        TextView textView = findViewById(R.id.page_title);
+        textView.setText(R.string.title_discussion);
     }
 
 }

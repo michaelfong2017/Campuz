@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.michael.campuz.R;
 import com.michael.campuz.ui.member.MemberDiscussionActivity;
-import com.michael.campuz.ui.member.MemberStudyGroupActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
