@@ -1,7 +1,5 @@
 package com.michael.campuz.ui.login;
 
-import android.app.Activity;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,13 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.michael.campuz.MainActivity;
 import com.michael.campuz.R;
-import com.michael.campuz.ui.guest.GuestMainActivity;
-import com.michael.campuz.ui.login.LoginViewModel;
-import com.michael.campuz.ui.login.LoginViewModelFactory;
-import com.michael.campuz.ui.member.MemberMainActivity;
-import com.orhanobut.logger.Logger;
+import com.michael.campuz.ui.member.MemberDiscussionActivity;
+import com.michael.campuz.ui.member.MemberStudyGroupActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -79,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                Intent intent = new Intent(LoginActivity.this, MemberMainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MemberDiscussionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

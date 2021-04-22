@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_discussion"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="@string/title_discussion" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_study_group"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="@string/title_study_group" />
+
+    <item
+        android:id="@+id/navigation_resources"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="@string/title_resources" />
 
     <item
         android:id="@+id/navigation_notifications"
