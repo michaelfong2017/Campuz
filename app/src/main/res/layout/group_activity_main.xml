@@ -68,7 +68,7 @@
 
                 </RelativeLayout>
 
-<!--                <include layout="@layout/content_scrolling" />-->
+                <include layout="@layout/content_scrolling" />
 
             </LinearLayout>
 

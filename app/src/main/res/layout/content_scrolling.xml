@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/thread_background"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,18 +15,25 @@
         <com.michael.campuz.ui.view.GroupThreadView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello" />
+            app:threadNumberOfComment="4"
+            app:threadStatus="Open"
+            app:threadTitle="COMP7506 finding project groupmates" />
+
         <com.michael.campuz.ui.view.GroupThreadView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello" />
+            app:threadNumberOfComment="21"
+            app:threadStatus="Full"
+            app:threadTitle="COMP7506 finding project groupmates to form a group of 4" />
+
         <com.michael.campuz.ui.view.GroupThreadView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello" />
+            app:threadNumberOfComment="106"
+            app:threadStatus="Closed"
+            app:threadTitle="COMP7606 group 1" />
 
     </LinearLayout>
-
 
 
 </androidx.core.widget.NestedScrollView>

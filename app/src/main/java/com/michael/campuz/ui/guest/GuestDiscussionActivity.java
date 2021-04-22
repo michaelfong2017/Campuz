@@ -6,7 +6,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.michael.campuz.R;
 import com.michael.campuz.ui.login.LoginActivity;
 import com.orhanobut.logger.Logger;
@@ -14,23 +13,9 @@ import com.orhanobut.logger.Logger;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 
 
 public class GuestDiscussionActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-
-    /** Firebase google signin **/
-    FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        mAuth.addAuthStateListener(mAuthListener);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +27,6 @@ public class GuestDiscussionActivity extends AppCompatActivity {
         /** Drawer **/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = new AppBarConfiguration.Builder()
-                .setOpenableLayout(drawer)
-                .build();
-
 
         /** Sidebar **/
         NavigationView sideNavigationView = findViewById(R.id.side_nav_view);

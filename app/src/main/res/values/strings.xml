@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Groupmate</string>
     <string name="title_discussion">Discussion</string>
-    <string name="title_group">Group Forming</string>
+    <string name="title_group">Grouping</string>
     <string name="title_resources">Resources</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">LoginActivity</string>
