@@ -1,27 +1,15 @@
 package com.michael.campuz.ui.member;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.michael.campuz.R;
-import com.michael.campuz.ui.login.LoginActivity;
-import com.michael.campuz.ui.login.LoginActivityResultContract;
-import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,14 +21,6 @@ import androidx.navigation.ui.NavigationUI;
 public class MemberMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration appBarConfiguration;
-
-    /** Activity launchers **/
-    private ActivityResultLauncher myActivityLauncher  = registerForActivityResult(new LoginActivityResultContract(), new ActivityResultCallback<String>() {
-        @Override
-        public void onActivityResult(String result) {
-            Logger.d(result);
-        }
-    });
 
     /** Firebase google signin **/
     FirebaseAuth mAuth;
@@ -57,18 +37,7 @@ public class MemberMainActivity extends AppCompatActivity implements BottomNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /** Check firebaseAuth status **/
-        mAuth = FirebaseAuth.getInstance();
-
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                if (firebaseAuth.getCurrentUser() == null) {
-//                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        };
+        Logger.i("Logged-in");
 
         /** Sidebar with drawer **/
         Toolbar toolbar = findViewById(R.id.toolbar);

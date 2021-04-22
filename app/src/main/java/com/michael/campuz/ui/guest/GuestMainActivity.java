@@ -1,11 +1,7 @@
 package com.michael.campuz.ui.guest;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -13,15 +9,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.michael.campuz.R;
 import com.michael.campuz.ui.login.LoginActivity;
-import com.michael.campuz.ui.login.LoginActivityResultContract;
-import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,14 +23,6 @@ import androidx.navigation.ui.NavigationUI;
 public class GuestMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration appBarConfiguration;
-
-    /** Activity launchers **/
-    private ActivityResultLauncher myActivityLauncher  = registerForActivityResult(new LoginActivityResultContract(), new ActivityResultCallback<String>() {
-        @Override
-        public void onActivityResult(String result) {
-            Logger.d(result);
-        }
-    });
 
     /** Firebase google signin **/
     FirebaseAuth mAuth;
@@ -106,7 +88,7 @@ public class GuestMainActivity extends AppCompatActivity implements BottomNaviga
         switch (item.getItemId()) {
             case R.id.option_login:
                 Intent intent = new Intent(GuestMainActivity.this, LoginActivity.class);
-                myActivityLauncher.launch("michael");
+                startActivity(intent);
                 break;
             default:
                 return false;
