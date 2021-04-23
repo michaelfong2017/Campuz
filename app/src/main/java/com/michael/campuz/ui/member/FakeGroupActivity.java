@@ -16,6 +16,7 @@ import com.michael.campuz.ui.view.GroupThreadView;
 import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -31,6 +32,8 @@ public class FakeGroupActivity extends AppCompatActivity {
     private LinearLayout scrollLinear;
 
     private int currentThreadId = 4;
+
+    private int GROUP_THREAD_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +145,34 @@ public class FakeGroupActivity extends AppCompatActivity {
     public void onThreadSubmit(View view) {
         Logger.d("onThreadSubmit");
         Intent intent = new Intent(FakeGroupActivity.this, FakeGroupThreadActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, GROUP_THREAD_REQUEST_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GROUP_THREAD_REQUEST_CODE) {
+/** Initialize UI elements **/
+            scrollLinear = findViewById(R.id.group_scroll_linear);
+
+
+            scrollLinear.addView(createThread("COMP7506", "Open", "3", "1/4"));
+
+        }
+    }
+
+    public void updateThreadWithId(int id, String title, String status, String numberOfComments, String people) {
+        String prefix = "group_thread_id_";
+
+        int raw_id = getResources().getIdentifier(prefix + id, "id", getPackageName());
+        GroupThreadView view = findViewById(id);
+        if (title != null)
+            view.setThreadTitle(title);
+        if (status != null)
+            view.setThreadStatus(status);
+        if (numberOfComments != null)
+            view.setThreadNumberOfComment(numberOfComments);
+        if (people != null)
+            view.setThreadPeople(people);
+    }
 }
