@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,9 +15,9 @@ import com.michael.campuz.R;
 import com.orhanobut.logger.Logger;
 
 public class GroupThreadView extends LinearLayout {
-    private String threadTitle;
-    private String threadStatus;
-    private String threadNumberOfComment;
+    private String threadTitle = "";
+    private String threadStatus = "";
+    private String threadNumberOfComment = "";
 
     public GroupThreadView(Context context) {
         super(context);
@@ -37,6 +39,22 @@ public class GroupThreadView extends LinearLayout {
         init(context, attrs);
     }
 
+    public void setThreadTitle(String threadTitle) {
+        TextView title = findViewById(R.id.thread_title);
+        title.setText(threadTitle);
+    }
+
+    public void setThreadStatus(String threadStatus) {
+        TextView status = findViewById(R.id.thread_status);
+        status.setText(threadStatus);
+
+    }
+
+    public void setThreadNumberOfComment(String threadNumberOfComment) {
+        TextView numberOfComments = findViewById(R.id.thread_number_of_comments);
+        numberOfComments.setText(threadNumberOfComment);
+    }
+
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.GroupThreadView);
         try {
@@ -50,7 +68,7 @@ public class GroupThreadView extends LinearLayout {
     }
 
     private void init(Context context) {
-        inflate(getContext(), R.layout.group_thread_layout,this);
+        LayoutInflater.from(context).inflate(R.layout.group_thread_layout,this);
 
         TextView title = findViewById(R.id.thread_title);
         title.setText(threadTitle);
@@ -58,7 +76,7 @@ public class GroupThreadView extends LinearLayout {
         TextView status = findViewById(R.id.thread_status);
         status.setText(threadStatus);
 
-        TextView numberOfComment = findViewById(R.id.thread_number_of_comment);
-        numberOfComment.setText(threadNumberOfComment);
+        TextView numberOfComments = findViewById(R.id.thread_number_of_comments);
+        numberOfComments.setText(threadNumberOfComment);
     }
 }

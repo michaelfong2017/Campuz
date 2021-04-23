@@ -8,11 +8,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
+        android:id="@+id/group_scroll_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.michael.campuz.ui.view.GroupThreadView
+            android:id="@+id/group_thread_id_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:threadNumberOfComment="4"
@@ -20,6 +22,7 @@
             app:threadTitle="COMP7506 finding project groupmates" />
 
         <com.michael.campuz.ui.view.GroupThreadView
+            android:id="@+id/group_thread_id_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:threadNumberOfComment="21"
@@ -27,6 +30,7 @@
             app:threadTitle="COMP7506 finding project groupmates to form a group of 4" />
 
         <com.michael.campuz.ui.view.GroupThreadView
+            android:id="@+id/group_thread_id_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:threadNumberOfComment="106"

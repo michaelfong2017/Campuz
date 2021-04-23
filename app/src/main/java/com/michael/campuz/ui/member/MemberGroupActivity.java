@@ -3,20 +3,25 @@ package com.michael.campuz.ui.member;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.michael.campuz.R;
+import com.michael.campuz.ui.view.GroupThreadView;
 import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
 public class MemberGroupActivity extends AppCompatActivity {
+
+    private LinearLayout scrollLinear;
+
+    private int currentThreadId = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,9 @@ public class MemberGroupActivity extends AppCompatActivity {
         setContentView(R.layout.group_activity_main);
 
         Logger.i("Logged-in");
+
+        /** Initialize UI elements **/
+        scrollLinear = findViewById(R.id.group_scroll_linear);
 
         /** Drawer **/
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -76,10 +84,10 @@ public class MemberGroupActivity extends AppCompatActivity {
                     case R.id.option_user:
 //                Intent intent = new Intent(MemberMainActivity.this, LoginActivity.class);
 //                myActivityLauncher.launch("michael");
+                        updateThreadWithId(2, null, null, "7");
                         break;
                     case R.id.option_add:
-//                Intent intent = new Intent(MemberMainActivity.this, LoginActivity.class);
-//                myActivityLauncher.launch("michael");
+                        scrollLinear.addView(createThread("hi", "open", "5"));
 
                         break;
                     default:
@@ -93,6 +101,29 @@ public class MemberGroupActivity extends AppCompatActivity {
         /** Title **/
         TextView textView = findViewById(R.id.page_title);
         textView.setText(R.string.title_group);
+    }
+
+    public GroupThreadView createThread(String title, String status, String numberOfComments) {
+        GroupThreadView view = new GroupThreadView(this);
+        view.setId(currentThreadId + 1);
+        currentThreadId++;
+        view.setThreadTitle(title);
+        view.setThreadStatus(status);
+        view.setThreadNumberOfComment(numberOfComments);
+        return view;
+    }
+
+    public void updateThreadWithId(int id, String title, String status, String numberOfComments) {
+        String prefix = "group_thread_id_";
+
+        int raw_id = getResources().getIdentifier(prefix + id, "id", getPackageName());
+        GroupThreadView view = findViewById(raw_id);
+        if (title != null)
+            view.setThreadTitle(title);
+        if (status != null)
+            view.setThreadStatus(status);
+        if (numberOfComments != null)
+            view.setThreadNumberOfComment(numberOfComments);
     }
 
 }
