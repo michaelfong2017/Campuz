@@ -3,6 +3,7 @@ package com.michael.campuz.ui.member;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,13 +24,13 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.List;
 
 
-public class MemberGroupActivity extends AppCompatActivity {
+public class FakeGroupActivity extends AppCompatActivity {
 
     private GroupViewModel groupViewModel;
 
     private LinearLayout scrollLinear;
 
-    private int currentThreadId = 3;
+    private int currentThreadId = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,9 @@ public class MemberGroupActivity extends AppCompatActivity {
             }
         });
 
+        groupViewModel.createThread("COMP7506", "Open", 1);
+
+
         /** Drawer **/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,24 +73,27 @@ public class MemberGroupActivity extends AppCompatActivity {
                         Logger.d(menuItem);
                         switch (menuItem.getItemId()) {
                             case R.id.navigation_discussion: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberDiscussionActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(MemberGroupActivity.this, MemberDiscussionActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_group: {
+                                Intent intent = new Intent(FakeGroupActivity.this, MemberGroupActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_resources: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberResourcesActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(MemberGroupActivity.this, MemberResourcesActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_notifications: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberNotificationsActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(MemberGroupActivity.this, MemberNotificationsActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             default:
@@ -110,7 +117,7 @@ public class MemberGroupActivity extends AppCompatActivity {
                         break;
                     case R.id.option_add:
 //                        groupViewModel.createThread("hi", "open", 5);
-                        Intent intent = new Intent(MemberGroupActivity.this, OpenGroupActivity.class);
+                        Intent intent = new Intent(FakeGroupActivity.this, OpenGroupActivity.class);
                         startActivity(intent);
 
                         break;
@@ -155,6 +162,12 @@ public class MemberGroupActivity extends AppCompatActivity {
             view.setThreadStatus(status);
         if (numberOfComments != null)
             view.setThreadNumberOfComment(numberOfComments);
+    }
+
+    public void onThreadSubmit(View view) {
+        Logger.d("onThreadSubmit");
+        Intent intent = new Intent(FakeGroupActivity.this, FakeGroupThreadActivity.class);
+        startActivity(intent);
     }
 
 }

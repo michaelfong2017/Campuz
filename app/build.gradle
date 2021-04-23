@@ -57,4 +57,6 @@ dependencies {
     // Logger
     implementation 'com.orhanobut:logger:2.2.0'
 
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1'
+
 }

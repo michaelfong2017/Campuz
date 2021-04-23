@@ -2,9 +2,11 @@ package com.michael.campuz.ui.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,7 +78,18 @@ public class GroupThreadView extends LinearLayout {
         TextView status = findViewById(R.id.thread_status);
         status.setText(threadStatus);
 
+        switch(threadStatus) {
+            case "Open":
+                status.setTextColor(Color.GREEN);
+                break;
+            case "Closed":
+                status.setTextColor(Color.RED);
+                break;
+            default:
+                break;
+        }
         TextView numberOfComments = findViewById(R.id.thread_number_of_comments);
         numberOfComments.setText(threadNumberOfComment);
     }
+
 }

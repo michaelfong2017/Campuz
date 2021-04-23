@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thread_background"
+    tools:context=".ui.member.OpenGroupActivity"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:background="@drawable/title_background"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/page_title"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="@string/title_group"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/group_thread_edit_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#aaffffff"
+            android:gravity="bottom"
+            android:hint="Title"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:paddingTop="15dp"
+            android:selectAllOnFocus="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#aaffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+
+        <EditText
+            android:id="@+id/group_thread_edit_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#aaffffff"
+            android:gravity="top"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:selectAllOnFocus="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#aaffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="26dp"
+            android:text="Join group mode"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/group_thread_edit_description" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:orientation="vertical"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <RadioButton
+                android:id="@+id/open_group_free_to_join"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ffffff"
+                android:onClick="onFreeToJoin"
+                android:text="Free to join"
+                android:textColor="#ffffff" />
+
+            <RadioButton
+                android:id="@+id/open_group_request_or_invitation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:buttonTint="#ffffff"
+                android:onClick="onRequestOrInvitation"
+                android:text="By request or invitation"
+                android:textColor="#ffffff" />
+
+            <RadioButton
+                android:id="@+id/open_group_invitation_only"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:buttonTint="#ffffff"
+                android:onClick="onInvitationOnly"
+                android:text="By invitation only"
+                android:textColor="#ffffff" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="21dp"
+            android:text="Kick member mode"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:orientation="vertical"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <RadioButton
+                android:id="@+id/open_group_kick_by_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ffffff"
+                android:onClick="onKickByAuthor"
+                android:text="Kick by author"
+                android:textColor="#ffffff" />
+
+            <RadioButton
+                android:id="@+id/open_group_vote_kick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:buttonTint="#ffffff"
+                android:onClick="onVoteKick"
+                android:text="Vote kick"
+                android:textColor="#ffffff" />
+
+        </RadioGroup>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:onClick="onSubmit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+
+
+
+
+
