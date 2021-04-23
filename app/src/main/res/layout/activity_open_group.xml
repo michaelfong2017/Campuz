@@ -167,6 +167,60 @@
 
         </RadioGroup>
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="26dp"
+            android:text="Number of members"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/group_thread_edit_description" />
+
+        <EditText
+            android:id="@+id/group_thread_edit_from"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="124dp"
+            android:backgroundTint="#aaffffff"
+            android:gravity="top"
+            android:hint="From"
+            android:inputType="textMultiLine"
+            android:lines="1"
+            android:selectAllOnFocus="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#aaffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <EditText
+            android:id="@+id/group_thread_edit_to"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#aaffffff"
+            android:gravity="top"
+            android:hint="To"
+            android:inputType="textMultiLine"
+            android:lines="1"
+            android:selectAllOnFocus="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#aaffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="—"
+            android:textSize="30dp"
+            android:textColor="#ffffff"
+            app:layout_constraintEnd_toStartOf="@+id/group_thread_edit_to"
+            app:layout_constraintStart_toEndOf="@+id/group_thread_edit_from"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
