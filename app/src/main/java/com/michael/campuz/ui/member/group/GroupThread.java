@@ -10,6 +10,7 @@ public class GroupThread {
     private String title;
     private String status;
     private int numberOfComments;
+    private String people;
 
     public GroupThread(int id) {
         this.id = id;
@@ -37,5 +38,13 @@ public class GroupThread {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPeople() {
+        return people;
+    }
+
+    public void setPeople(String people) {
+        this.people = people;
     }
 }

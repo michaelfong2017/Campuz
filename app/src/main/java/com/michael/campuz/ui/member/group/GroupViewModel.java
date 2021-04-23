@@ -30,11 +30,12 @@ public class GroupViewModel extends ViewModel {
         return groupThreads;
     }
 
-    public void createThread(String title, String status, int numberOfComments) {
+    public void createThread(String title, String status, int numberOfComments, String people) {
         GroupThread groupThread = new GroupThread(++currentThreadId);
         groupThread.setTitle(title);
         groupThread.setStatus(status);
         groupThread.setNumberOfComments(numberOfComments);
+        groupThread.setPeople(people);
         List<GroupThread> list = groupThreads.getValue();
         if (list == null) {
             list = new ArrayList<GroupThread>();

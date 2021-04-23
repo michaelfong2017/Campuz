@@ -20,6 +20,7 @@ public class GroupThreadView extends LinearLayout {
     private String threadTitle = "";
     private String threadStatus = "";
     private String threadNumberOfComment = "";
+    private String threadPeople = "";
 
     public GroupThreadView(Context context) {
         super(context);
@@ -57,12 +58,18 @@ public class GroupThreadView extends LinearLayout {
         numberOfComments.setText(threadNumberOfComment);
     }
 
+    public void setThreadPeople(String threadPeople) {
+        TextView people = findViewById(R.id.thread_people);
+        people.setText(threadPeople);
+    }
+
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.GroupThreadView);
         try {
             threadTitle = ta.getString(R.styleable.GroupThreadView_threadTitle);
             threadStatus = ta.getString(R.styleable.GroupThreadView_threadStatus);
             threadNumberOfComment = String.valueOf(ta.getInt(R.styleable.GroupThreadView_threadNumberOfComment, 0));
+            threadPeople = ta.getString(R.styleable.GroupThreadView_threadPeople);
         } finally {
             ta.recycle();
         }
@@ -90,6 +97,9 @@ public class GroupThreadView extends LinearLayout {
         }
         TextView numberOfComments = findViewById(R.id.thread_number_of_comments);
         numberOfComments.setText(threadNumberOfComment);
+
+        TextView people = findViewById(R.id.thread_people);
+        people.setText(threadPeople);
     }
 
 }

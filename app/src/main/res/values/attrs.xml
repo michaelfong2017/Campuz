@@ -3,6 +3,7 @@
     <declare-styleable name="GroupThreadView">
         <attr name="threadTitle" format="string"/>
         <attr name="threadStatus" format="string"/>
+        <attr name="threadPeople" format="string"/>
         <attr name="threadNumberOfComment" format="integer"/>
     </declare-styleable>
 </resources>

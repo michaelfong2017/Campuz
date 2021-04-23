@@ -42,22 +42,8 @@ public class FakeGroupActivity extends AppCompatActivity {
         /** Initialize UI elements **/
         scrollLinear = findViewById(R.id.group_scroll_linear);
 
-        /** ViewModel **/
-        groupViewModel = new ViewModelProvider(this).get(GroupViewModel.class);
-        groupViewModel.getGroupThreads().observe(this, new Observer<List<GroupThread>>() {
-            @Override
-            public void onChanged(List<GroupThread> groupThreads) {
-                Logger.d(groupThreads);
-                if (groupThreads == null || groupThreads.size() == 0) {
-                    return;
-                }
-                scrollLinear.addView(createThread(groupThreads.get(groupThreads.size()-1).getTitle(), groupThreads.get(groupThreads.size()-1).getStatus(), String.valueOf(groupThreads.get(groupThreads.size()-1).getNumberOfComments())));
 
-
-            }
-        });
-
-        groupViewModel.createThread("COMP7506", "Open", 1);
+        scrollLinear.addView(createThread("COMP7506", "Open", "1", "0/4"));
 
 
         /** Drawer **/
@@ -141,28 +127,17 @@ public class FakeGroupActivity extends AppCompatActivity {
 //        Logger.d(groupViewModel.getGroupThreads());
     }
 
-    public GroupThreadView createThread(String title, String status, String numberOfComments) {
+    public GroupThreadView createThread(String title, String status, String numberOfComments, String people) {
         GroupThreadView view = new GroupThreadView(this);
         view.setId(currentThreadId + 1);
         currentThreadId++;
         view.setThreadTitle(title);
         view.setThreadStatus(status);
         view.setThreadNumberOfComment(numberOfComments);
+        view.setThreadPeople(people);
         return view;
     }
 
-    public void updateThreadWithId(int id, String title, String status, String numberOfComments) {
-        String prefix = "group_thread_id_";
-
-        int raw_id = getResources().getIdentifier(prefix + id, "id", getPackageName());
-        GroupThreadView view = findViewById(raw_id);
-        if (title != null)
-            view.setThreadTitle(title);
-        if (status != null)
-            view.setThreadStatus(status);
-        if (numberOfComments != null)
-            view.setThreadNumberOfComment(numberOfComments);
-    }
 
     public void onThreadSubmit(View view) {
         Logger.d("onThreadSubmit");

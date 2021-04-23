@@ -17,6 +17,7 @@
             android:id="@+id/group_thread_id_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:threadPeople="2/6"
             app:threadNumberOfComment="4"
             app:threadStatus="Open"
             app:threadTitle="COMP7506 finding project groupmates" />
@@ -25,6 +26,7 @@
             android:id="@+id/group_thread_id_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:threadPeople="4/4"
             app:threadNumberOfComment="21"
             app:threadStatus="Full"
             app:threadTitle="COMP7506 finding project groupmates to form a group of 4" />
@@ -34,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:threadNumberOfComment="106"
+            app:threadPeople="3/3"
+
             app:threadStatus="Closed"
             app:threadTitle="COMP7606 group 1" />
 
