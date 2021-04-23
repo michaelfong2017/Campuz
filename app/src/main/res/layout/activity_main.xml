@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.member.MemberGroupActivity">
+    tools:context=".ui.member.MemberDiscussionActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar0"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="?attr/colorPrimary"
@@ -32,7 +32,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav_view"
+                android:id="@+id/bottom_nav_view0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -58,7 +58,7 @@
                     android:theme="@style/ThemeOverlay.AppCompat.Dark" >
 
                     <TextView
-                        android:id="@+id/page_title"
+                        android:id="@+id/page_title0"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -68,7 +68,7 @@
 
                 </RelativeLayout>
 
-<!--                <include layout="@layout/content_scrolling" />-->
+                <include layout="@layout/content_scrolling" />
 
             </LinearLayout>
 
@@ -77,7 +77,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/side_nav_view"
+        android:id="@+id/side_nav_view0"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

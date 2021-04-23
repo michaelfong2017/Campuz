@@ -25,11 +25,11 @@ public class GuestDiscussionActivity extends AppCompatActivity {
         Logger.i("Logged-in");
 
         /** Drawer **/
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar0);
         setSupportActionBar(toolbar);
 
         /** Sidebar **/
-        NavigationView sideNavigationView = findViewById(R.id.side_nav_view);
+        NavigationView sideNavigationView = findViewById(R.id.side_nav_view0);
         sideNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -57,7 +57,7 @@ public class GuestDiscussionActivity extends AppCompatActivity {
                 });
 
         /** Bottom navigation bar **/
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view0);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

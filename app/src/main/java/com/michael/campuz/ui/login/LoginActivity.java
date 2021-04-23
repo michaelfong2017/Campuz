@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.michael.campuz.R;
 import com.michael.campuz.ui.member.MemberDiscussionActivity;
+import com.michael.campuz.ui.member.MemberGroupActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                Intent intent = new Intent(LoginActivity.this, MemberDiscussionActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MemberGroupActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

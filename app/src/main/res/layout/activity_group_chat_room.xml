@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/thread_background"
     android:orientation="vertical"
-    tools:context=".ui.member.FakeGroupThreadActivity">
+    tools:context=".ui.member.OpenGroupActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,23 +17,14 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <TextView
-            android:id="@+id/page_title"
+            android:id="@+id/page_title2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="COMP7506"
+            android:text="Group Chat - COMP7506"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"            android:text="Join"
-            android:textSize="20dp"
-            android:paddingTop="12dp"
-            android:onClick="onJoinGroup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,68 +39,27 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:id="@+id/thread_discussion_linear"
+                android:id="@+id/thread_discussion_linear2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/thread_border"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="8dp"
-                            android:paddingTop="8dp"
-                            android:text="#1"
-                            android:textColor="#ffff00"
-                            android:textSize="15dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="8dp"
-                            android:paddingTop="8dp"
-                            android:text="Michael Fong"
-                            android:textColor="#22ffff"
-                            android:textSize="15dp" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="12dp"
-                        android:text="Testing"
-                        android:textColor="#ffffff" />
-
-                </LinearLayout>
+                    android:padding="16dp"
+                    android:textSize="16dp"
+                    android:text="{Michael Fong} joined the group."
+                    android:textColor="#ffffff"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
         <EditText
-            android:id="@+id/group_thread_edit_reply"
+            android:id="@+id/group_thread_edit_reply2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

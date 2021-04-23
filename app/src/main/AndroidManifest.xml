@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.member.FakeGroupThreadActivity"></activity>
+        <activity android:name=".ui.member.GroupChatRoomActivity"></activity>
+        <activity android:name=".ui.member.FakeGroupThreadActivity" />
         <activity android:name=".ui.member.OpenGroupActivity" />
         <activity android:name=".ui.member.FakeGroupActivity" />
         <activity
