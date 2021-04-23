@@ -155,7 +155,8 @@ public class FakeGroupActivity extends AppCompatActivity {
 /** Initialize UI elements **/
             scrollLinear = findViewById(R.id.group_scroll_linear);
 
-
+            View ViewToRemove = scrollLinear.getChildAt(3);
+            scrollLinear.removeView(ViewToRemove);
             scrollLinear.addView(createThread("COMP7506", "Open", "3", "1/4"));
 
         }
