@@ -1,4 +1,4 @@
-package com.michael.campuz.ui.member;
+package com.michael.campuz.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,8 +14,9 @@ import com.michael.campuz.R;
 import com.michael.campuz.ui.view.GroupThreadDiscussionView;
 import com.orhanobut.logger.Logger;
 
-public class FakeGroupThreadActivity extends AppCompatActivity {
+public class GroupThreadActivity extends AppCompatActivity {
     private int currentNumber = 1;
+    public static final String EXTRA_GROUP_ID = "group_id";
 
     private String content="";
 
@@ -23,6 +24,9 @@ public class FakeGroupThreadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fake_group_thread);
+
+        int groupId = getIntent().getIntExtra(EXTRA_GROUP_ID, -1);
+        Logger.d(groupId);
 
         // your text box
         final EditText edit_txt = (EditText) findViewById(R.id.group_thread_edit_reply);
@@ -51,7 +55,7 @@ public class FakeGroupThreadActivity extends AppCompatActivity {
     }
 
     public void onJoinGroup(View view) {
-        Intent intent = new Intent(FakeGroupThreadActivity.this, GroupChatRoomActivity.class);
+        Intent intent = new Intent(GroupThreadActivity.this, GroupChatRoomActivity.class);
         startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.michael.campuz.ui.member;
+package com.michael.campuz.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,11 +42,22 @@ public class OpenGroupActivity extends AppCompatActivity {
     private void saveThread() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
-        String from = editTextFrom.getText().toString();
-        String to = editTextTo.getText().toString();
+
+        int from, to;
+        try {
+            from = Integer.parseInt(editTextFrom.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return;
+        }
+        try {
+            to = Integer.parseInt(editTextTo.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return;
+        }
 
         if (title.trim().isEmpty() || description.trim().isEmpty()
-                || from.isEmpty() || to.isEmpty()
                 || joinMode.isEmpty() || kickMode.isEmpty()) {
             return;
         }

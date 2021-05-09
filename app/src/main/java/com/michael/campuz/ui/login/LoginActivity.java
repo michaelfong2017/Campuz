@@ -22,11 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.michael.campuz.R;
-import com.michael.campuz.ui.member.GroupActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+
+    public static final String EXTRA_IS_LOGGED_IN = "is_logged_in";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,9 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                Intent intent = new Intent(LoginActivity.this, GroupActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
+                Intent data = new Intent();
+                data.putExtra(EXTRA_IS_LOGGED_IN, true);
+                setResult(RESULT_OK, data);
+                finish();
             }
         });
 

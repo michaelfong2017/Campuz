@@ -10,10 +10,10 @@
         android:background="@drawable/thread_background" >
 
         <Button
+            android:id="@+id/thread_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:onClick="onThreadSubmit" />
+            android:background="@android:color/transparent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"

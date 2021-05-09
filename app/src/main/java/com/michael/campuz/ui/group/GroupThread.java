@@ -1,4 +1,4 @@
-package com.michael.campuz.ui.member.group;
+package com.michael.campuz.ui.group;
 
 import androidx.annotation.Nullable;
 

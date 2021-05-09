@@ -1,4 +1,4 @@
-package com.michael.campuz.ui.member;
+package com.michael.campuz.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 

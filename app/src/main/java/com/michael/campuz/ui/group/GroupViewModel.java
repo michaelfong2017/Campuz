@@ -1,4 +1,4 @@
-package com.michael.campuz.ui.member.group;
+package com.michael.campuz.ui.group;
 
 import android.util.Patterns;
 
@@ -27,19 +27,22 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class GroupViewModel extends ViewModel {
     private final SavedStateHandle savedStateHandle;
     private final GroupRepository repository;
-    private LiveData<List<Group>> allGroups;
+
+    private MutableLiveData<List<Group>> allGroups;
 
     @Inject
     public GroupViewModel(SavedStateHandle savedStateHandle, GroupRepository repository) {
         this.savedStateHandle = savedStateHandle;
         this.repository = repository;
-//        this.allGroups = repository.getAllGroups();
-        this.allGroups = getAllGroups();
+        this.allGroups = new MutableLiveData<>(new ArrayList<>());
     }
 
-//    public void insert(Group group) {
+    public void insert(Group group) {
 //        repository.insert(group);
-//    }
+        List<Group> old = allGroups.getValue();
+        old.add(group);
+        allGroups.setValue(old);
+    }
 //    public void update(Group group) {
 //        repository.update(group);
 //    }
@@ -50,16 +53,17 @@ public class GroupViewModel extends ViewModel {
 //        repository.deleteAllGroups();
 //    }
     public LiveData<List<Group>> getAllGroups() {
-        Group test = new Group("tit","desc",1,4,"free","vote", "open"
-                ,0,5);
-        Group test2 = new Group("tit2","desc2",3,4,"free","vote", "open"
-                ,1,7);
-        List<Group> testList = new ArrayList<>();
-        testList.add(test);
-        testList.add(test2);
-        MutableLiveData<List<Group>> groups = new MutableLiveData<>();
-        groups.setValue(testList);
-        return groups;
-//        return allGroups;
+//        Group test = new Group("tit","desc",1,4,"free","vote", "open"
+//                ,0,5);
+//        Group test2 = new Group("tit2","desc2",3,4,"free","vote", "open"
+//                ,1,7);
+//        List<Group> testList = new ArrayList<>();
+//        testList.add(test);
+//        testList.add(test2);
+//        testList.add(test2);
+//        testList.add(test2);
+//
+//        allGroups.setValue(testList);
+        return allGroups;
     }
 }

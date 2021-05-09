@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/thread_background"
     android:orientation="vertical"
-    tools:context=".ui.member.FakeGroupThreadActivity">
+    tools:context=".ui.GroupThreadActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

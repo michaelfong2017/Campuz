@@ -1,19 +1,17 @@
-package com.michael.campuz.ui.member;
+package com.michael.campuz.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.michael.campuz.R;
 import com.michael.campuz.data.group.Group;
-import com.michael.campuz.ui.GroupAdapter;
-import com.michael.campuz.ui.member.group.GroupThread;
-import com.michael.campuz.ui.member.group.GroupViewModel;
-import com.michael.campuz.ui.view.GroupThreadView;
+import com.michael.campuz.ui.login.LoginActivity;
+import com.michael.campuz.ui.group.GroupViewModel;
 import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
@@ -34,11 +32,8 @@ public class GroupActivity extends AppCompatActivity {
 
     private GroupViewModel groupViewModel;
 
-    private LinearLayout scrollLinear;
-
-    private int currentThreadId = 3;
-
-    private static final int OPEN_GROUP_REQUEST_CODE = 1;
+    private static final int LOGIN_REQUEST_CODE = 1;
+    private static final int OPEN_GROUP_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,24 +74,24 @@ public class GroupActivity extends AppCompatActivity {
                         Logger.d(menuItem);
                         switch (menuItem.getItemId()) {
                             case R.id.navigation_discussion: {
-                                Intent intent = new Intent(GroupActivity.this, MemberDiscussionActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(GroupActivity.this, MemberDiscussionActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_group: {
                                 break;
                             }
                             case R.id.navigation_resources: {
-                                Intent intent = new Intent(GroupActivity.this, MemberResourcesActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(GroupActivity.this, MemberResourcesActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_notifications: {
-                                Intent intent = new Intent(GroupActivity.this, MemberNotificationsActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+//                                Intent intent = new Intent(GroupActivity.this, MemberNotificationsActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
                                 break;
                             }
                             default:
@@ -113,16 +108,16 @@ public class GroupActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Logger.d(item);
+                Intent intent;
                 switch (item.getItemId()) {
                     case R.id.option_user:
-//                Intent intent = new Intent(MemberMainActivity.this, LoginActivity.class);
-//                myActivityLauncher.launch("michael");
+                        intent = new Intent(GroupActivity.this, LoginActivity.class);
+                        startActivityForResult(intent, LOGIN_REQUEST_CODE);
                         break;
                     case R.id.option_add:
 //                        groupViewModel.createThread("hi", "open", 5);
-                        Intent intent = new Intent(GroupActivity.this, OpenGroupActivity.class);
+                        intent = new Intent(GroupActivity.this, OpenGroupActivity.class);
                         startActivityForResult(intent, OPEN_GROUP_REQUEST_CODE);
-
                         break;
                     default:
                         return false;
@@ -148,45 +143,38 @@ public class GroupActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == OPEN_GROUP_REQUEST_CODE && resultCode == RESULT_OK) {
-            String title = data.getStringExtra(OpenGroupActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(OpenGroupActivity.EXTRA_DESCRIPTION);
-            String from = data.getStringExtra(OpenGroupActivity.EXTRA_FROM);
-            String to = data.getStringExtra(OpenGroupActivity.EXTRA_TO);
-            String joinMode = data.getStringExtra(OpenGroupActivity.EXTRA_JOIN_MODE);
-            String kickMode = data.getStringExtra(OpenGroupActivity.EXTRA_KICK_MODE);
+        switch (requestCode) {
+            case LOGIN_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    boolean isLoggedIn = data.getBooleanExtra(LoginActivity.EXTRA_IS_LOGGED_IN, false);
+                    Logger.d(isLoggedIn);
+                }
+                break;
 
-            Logger.d(title);
-            Logger.d(description);
-            Logger.d(from);
-            Logger.d(to);
-            Logger.d(joinMode);
-            Logger.d(kickMode);
+            case OPEN_GROUP_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    String title = data.getStringExtra(OpenGroupActivity.EXTRA_TITLE);
+                    String description = data.getStringExtra(OpenGroupActivity.EXTRA_DESCRIPTION);
+                    int from = data.getIntExtra(OpenGroupActivity.EXTRA_FROM, 0);
+                    int to = data.getIntExtra(OpenGroupActivity.EXTRA_TO, 0);
+                    String joinMode = data.getStringExtra(OpenGroupActivity.EXTRA_JOIN_MODE);
+                    String kickMode = data.getStringExtra(OpenGroupActivity.EXTRA_KICK_MODE);
 
+                    Logger.d(title);
+                    Logger.d(description);
+                    Logger.d(from);
+                    Logger.d(to);
+                    Logger.d(joinMode);
+                    Logger.d(kickMode);
+
+                    Group group = new Group(title, description, from, to, joinMode, kickMode,
+                            "Open", 0, 1);
+
+                    groupViewModel.insert(group);
+                }
+                break;
         }
-    }
 
-    public GroupThreadView createThread(String title, String status, String numberOfComments) {
-        GroupThreadView view = new GroupThreadView(this);
-        view.setId(currentThreadId + 1);
-        currentThreadId++;
-        view.setThreadTitle(title);
-        view.setThreadStatus(status);
-        view.setThreadNumberOfComment(numberOfComments);
-        return view;
-    }
-
-    public void updateThreadWithId(int id, String title, String status, String numberOfComments) {
-        String prefix = "group_thread_id_";
-
-        int raw_id = getResources().getIdentifier(prefix + id, "id", getPackageName());
-        GroupThreadView view = findViewById(raw_id);
-        if (title != null)
-            view.setThreadTitle(title);
-        if (status != null)
-            view.setThreadStatus(status);
-        if (numberOfComments != null)
-            view.setThreadNumberOfComment(numberOfComments);
     }
 
 }

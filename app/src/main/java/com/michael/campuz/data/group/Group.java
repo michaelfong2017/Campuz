@@ -101,4 +101,12 @@ public class Group {
     public void setNumberOfComments(int numberOfComments) {
         this.numberOfComments = numberOfComments;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
