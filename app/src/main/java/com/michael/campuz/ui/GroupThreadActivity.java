@@ -21,6 +21,7 @@ import com.michael.campuz.ui.group.GroupViewModel;
 import com.michael.campuz.ui.view.GroupThreadDiscussionView;
 import com.orhanobut.logger.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -44,27 +45,10 @@ public class GroupThreadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_thread);
 
+        groupId = getIntent().getIntExtra(EXTRA_GROUP_ID, -1);
+        Logger.d(groupId);
+
         /** Find Views **/
-        // your text box
-        editTextReply = (EditText) findViewById(R.id.group_thread_edit_reply);
-        editTextReply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String reply = editTextReply.getText().toString();
-
-                GroupReply groupReply = new GroupReply(groupId, ++currentNumberOfReplies, "Michael Fong", reply);
-                groupViewModel.insertReply(groupReply);
-
-
-                currentGroup.setNumberOfComments(currentGroup.getNumberOfComments() + 1);
-                groupViewModel.update(currentGroup);
-
-
-                editTextReply.getText().clear();
-            }
-        });
-
-        textViewTitle = (TextView) findViewById(R.id.page_title);
 
         /** RecyclerView **/
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -76,8 +60,28 @@ public class GroupThreadActivity extends AppCompatActivity {
 
 
 
-        groupId = getIntent().getIntExtra(EXTRA_GROUP_ID, -1);
-        Logger.d(groupId);
+        // your text box
+        editTextReply = (EditText) findViewById(R.id.group_thread_edit_reply);
+        editTextReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String reply = editTextReply.getText().toString();
+
+                GroupReply groupReply = new GroupReply(groupId, ++currentNumberOfReplies, "Michael Fong", reply);
+                groupViewModel.insertReply(groupReply);
+
+
+                currentGroup.setNumberOfComments(currentNumberOfReplies);
+                groupViewModel.update(currentGroup);
+
+
+                editTextReply.getText().clear();
+            }
+        });
+
+        textViewTitle = (TextView) findViewById(R.id.page_title);
+
+
 
         groupViewModel = new ViewModelProvider(this).get(GroupViewModel.class);
         groupViewModel.getGroupById(groupId).observe(this, new Observer<Group>() {
@@ -90,11 +94,13 @@ public class GroupThreadActivity extends AppCompatActivity {
             }
         });
 
-        groupViewModel.getAllGroupReplies().observe(this, new Observer<List<GroupReply>>() {
+        groupViewModel.getAllGroupRepliesByGroup(groupId).observe(this, new Observer<List<GroupReply>>() {
             @Override
             public void onChanged(List<GroupReply> groupReplies) {
                 Logger.d(groupReplies.size());
-                currentNumberOfReplies = groupReplies.size();
+                if (groupReplies.size() > currentNumberOfReplies) {
+                    currentNumberOfReplies = groupReplies.size();
+                }
                 adapter.setGroupReplies(groupReplies);
             }
         });
@@ -102,10 +108,15 @@ public class GroupThreadActivity extends AppCompatActivity {
     }
 
     public void onJoinGroup(View view) {
-        currentGroup.setNumberOfPeople(currentGroup.getNumberOfPeople() + 1);
-        groupViewModel.update(currentGroup);
+        List<String> listOfMembers = Arrays.asList(currentGroup.getMembers().split("\\s*;\\s*"));
+        if (!listOfMembers.contains("Michael Fong")) {
+            currentGroup.setNumberOfPeople(currentGroup.getNumberOfPeople() + 1);
+            currentGroup.setMembers(currentGroup.getMembers() + "Michael Fong;");
+            groupViewModel.update(currentGroup);
+        }
 
         Intent intent = new Intent(GroupThreadActivity.this, GroupChatRoomActivity.class);
+        intent.putExtra(GroupThreadActivity.EXTRA_GROUP_ID, groupId);
         startActivity(intent);
     }
 }

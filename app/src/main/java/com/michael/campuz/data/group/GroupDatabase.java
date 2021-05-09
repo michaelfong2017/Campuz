@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Group.class, GroupReply.class}, version = 2)
+@Database(entities = {Group.class, GroupReply.class}, version = 3)
 public abstract class GroupDatabase extends RoomDatabase {
     private static GroupDatabase instance;
     public abstract GroupDao groupDao();

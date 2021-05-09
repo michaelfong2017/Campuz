@@ -30,14 +30,13 @@ public class GroupViewModel extends ViewModel {
     private final GroupRepository repository;
 
     private LiveData<List<Group>> allGroups;
-    private LiveData<List<GroupReply>> allGroupReplies;
+    int numberOfGroups;
 
     @Inject
     public GroupViewModel(SavedStateHandle savedStateHandle, GroupRepository repository) {
         this.savedStateHandle = savedStateHandle;
         this.repository = repository;
         allGroups = repository.getAllGroups();
-        allGroupReplies = repository.getAllGroupReplies();
     }
 
     /** Group **/
@@ -56,6 +55,12 @@ public class GroupViewModel extends ViewModel {
     public LiveData<List<Group>> getAllGroups() {
         return allGroups;
     }
+    public void setNumberOfGroups(int numberOfGroups) {
+        this.numberOfGroups = numberOfGroups;
+    }
+    public int getNumberOfGroups() {
+        return numberOfGroups;
+    }
     public LiveData<Group> getGroupById(int id) {
         return repository.getGroupById(id);
     }
@@ -73,7 +78,8 @@ public class GroupViewModel extends ViewModel {
     public void deleteAllGroupReplies() {
         repository.deleteAllGroupReplies();
     }
-    public LiveData<List<GroupReply>> getAllGroupReplies() {
-        return allGroupReplies;
+    public LiveData<List<GroupReply>> getAllGroupRepliesByGroup(int id) {
+        return repository.getAllGroupRepliesByGroup(id);
     }
+
 }

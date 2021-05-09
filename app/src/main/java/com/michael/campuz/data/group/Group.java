@@ -18,7 +18,9 @@ public class Group {
     private int numberOfPeople;
     private int numberOfComments;
 
-    public Group(String title, String description, int from, int to, String joinMode, String kickMode, String status, int numberOfPeople, int numberOfComments) {
+    private String members;
+
+    public Group(String title, String description, int from, int to, String joinMode, String kickMode, String status, int numberOfPeople, int numberOfComments, String members) {
         this.title = title;
         this.description = description;
         this.from = from;
@@ -28,6 +30,7 @@ public class Group {
         this.status = status;
         this.numberOfPeople = numberOfPeople;
         this.numberOfComments = numberOfComments;
+        this.members = members;
     }
 
     public String getTitle() {
@@ -108,5 +111,13 @@ public class Group {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getMembers() {
+        return members;
+    }
+
+    public void setMembers(String members) {
+        this.members = members;
     }
 }

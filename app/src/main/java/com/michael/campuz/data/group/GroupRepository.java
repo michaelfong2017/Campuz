@@ -21,8 +21,6 @@ public class GroupRepository {
     private GroupDao groupDao;
     private GroupReplyDao groupReplyDao;
     private LiveData<List<Group>> allGroups;
-    private LiveData<List<GroupReply>> allGroupReplies;
-
 
     @Inject
     public GroupRepository(Application application) {
@@ -30,7 +28,6 @@ public class GroupRepository {
         groupDao = database.groupDao();
         allGroups = groupDao.getAllGroups();
         groupReplyDao = database.groupReplyDao();
-        allGroupReplies = groupReplyDao.getAllGroupReplies();
     }
     /** Group **/
     public void insert(Group group) {
@@ -109,8 +106,8 @@ public class GroupRepository {
     public void deleteAllGroupReplies() {
         new DeleteAllGroupRepliesAsyncTask(groupReplyDao).execute();
     }
-    public LiveData<List<GroupReply>> getAllGroupReplies() {
-        return allGroupReplies;
+    public LiveData<List<GroupReply>> getAllGroupRepliesByGroup(int id) {
+        return groupReplyDao.getAllGroupRepliesByGroup(id);
     }
 
     private static class InsertGroupReplyAsyncTask extends AsyncTask<GroupReply, Void, Void> {

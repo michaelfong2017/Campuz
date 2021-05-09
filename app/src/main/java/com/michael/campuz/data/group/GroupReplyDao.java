@@ -19,6 +19,6 @@ public interface GroupReplyDao {
     void delete(GroupReply groupReply);
     @Query("DELETE FROM group_reply_table")
     void deleteAllGroupReplies();
-    @Query("SELECT * FROM group_reply_table")
-    LiveData<List<GroupReply>> getAllGroupReplies();
+    @Query("SELECT * FROM group_reply_table WHERE id == :id")
+    LiveData<List<GroupReply>> getAllGroupRepliesByGroup(int id);
 }

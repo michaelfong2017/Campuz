@@ -3,7 +3,6 @@ package com.michael.campuz.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,7 +58,17 @@ public class GroupActivity extends AppCompatActivity {
         groupViewModel.getAllGroups().observe(this, new Observer<List<Group>>() {
             @Override
             public void onChanged(@Nullable List<Group> groups) {
+                Logger.d(groups.size());
                 adapter.setGroups(groups);
+
+                int size = groups.size();
+                if (size > 0 && groupViewModel.getNumberOfGroups() > 0 && size > groupViewModel.getNumberOfGroups()) {
+                    Logger.d(groups.get(size - 1).getId());
+                    GroupReply groupReply = new GroupReply(groups.get(size - 1).getId(), 1, "Michael Fong", groups.get(groups.size() - 1).getDescription());
+                    groupViewModel.insertReply(groupReply);
+                }
+
+                groupViewModel.setNumberOfGroups(groups.size());
             }
         });
 
@@ -172,12 +182,9 @@ public class GroupActivity extends AppCompatActivity {
                     Logger.d(kickMode);
 
                     Group group = new Group(title, description, from, to, joinMode, kickMode,
-                            "Open", 0, 1);
+                            "Open", 0, 1, "");
 
                     groupViewModel.insert(group);
-
-                    GroupReply groupReply = new GroupReply(group.getId(), 1, "Michael Fong", description);
-                    groupViewModel.insertReply(groupReply);
                 }
                 break;
         }
