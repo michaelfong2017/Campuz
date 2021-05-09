@@ -3,18 +3,14 @@ package com.michael.campuz.ui.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.michael.campuz.R;
-import com.orhanobut.logger.Logger;
 
 public class GroupThreadView extends LinearLayout {
     private String threadTitle = "";
@@ -77,7 +73,7 @@ public class GroupThreadView extends LinearLayout {
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.group_thread_layout,this);
+        LayoutInflater.from(context).inflate(R.layout.group_item,this);
 
         TextView title = findViewById(R.id.thread_title);
         title.setText(threadTitle);

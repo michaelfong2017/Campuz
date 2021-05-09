@@ -43,7 +43,7 @@ public class MemberNotificationsActivity extends AppCompatActivity {
                                 break;
                             }
                             case R.id.navigation_group: {
-                                Intent intent = new Intent(MemberNotificationsActivity.this, MemberGroupActivity.class);
+                                Intent intent = new Intent(MemberNotificationsActivity.this, GroupActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 break;

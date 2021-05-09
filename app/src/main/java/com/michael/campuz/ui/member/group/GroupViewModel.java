@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.michael.campuz.R;
 import com.michael.campuz.data.Result;
+import com.michael.campuz.data.group.Group;
+import com.michael.campuz.data.group.GroupRepository;
 import com.michael.campuz.data.model.LoggedInUser;
 import com.michael.campuz.ui.view.GroupThreadView;
 import com.orhanobut.logger.Logger;
@@ -16,52 +18,48 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class GroupViewModel extends ViewModel {
-    private SavedStateHandle savedStateHandle;
+    private final SavedStateHandle savedStateHandle;
+    private final GroupRepository repository;
+    private LiveData<List<Group>> allGroups;
 
-    public GroupViewModel(SavedStateHandle savedStateHandle) {
+    @Inject
+    public GroupViewModel(SavedStateHandle savedStateHandle, GroupRepository repository) {
         this.savedStateHandle = savedStateHandle;
+        this.repository = repository;
+//        this.allGroups = repository.getAllGroups();
+        this.allGroups = getAllGroups();
     }
 
-    private MutableLiveData<List<GroupThread>> groupThreads = new MutableLiveData<List<GroupThread>>();;
-    private int currentThreadId = 3;
-
-    public MutableLiveData<List<GroupThread>> getGroupThreads() {
-        return groupThreads;
-    }
-
-    public void createThread(String title, String status, int numberOfComments, String people) {
-        GroupThread groupThread = new GroupThread(++currentThreadId);
-        groupThread.setTitle(title);
-        groupThread.setStatus(status);
-        groupThread.setNumberOfComments(numberOfComments);
-        groupThread.setPeople(people);
-        List<GroupThread> list = groupThreads.getValue();
-        if (list == null) {
-            list = new ArrayList<GroupThread>();
-        }
-        list.add(groupThread);
-        groupThreads.setValue(list);
-    }
-
-//    public void updateThreadWithId(int id, String title, String status, String numberOfComments) {
-//        String prefix = "group_thread_id_";
-//
-//        int raw_id = getResources().getIdentifier(prefix + id, "id", getPackageName());
-//        GroupThreadView view = findViewById(raw_id);
-//        if (title != null)
-//            view.setThreadTitle(title);
-//        if (status != null)
-//            view.setThreadStatus(status);
-//        if (numberOfComments != null)
-//            view.setThreadNumberOfComment(numberOfComments);
+//    public void insert(Group group) {
+//        repository.insert(group);
 //    }
-
-    public void saveGroupThreads() {
-        Logger.d(groupThreads.getValue());
-//        savedStateHandle.set("groupThreads", groupThreads.getValue());
-//        Logger.d(savedStateHandle.getLiveData("groupThreads").getValue());
-
+//    public void update(Group group) {
+//        repository.update(group);
+//    }
+//    public void delete(Group group) {
+//        repository.delete(group);
+//    }
+//    public void deleteAllGroups() {
+//        repository.deleteAllGroups();
+//    }
+    public LiveData<List<Group>> getAllGroups() {
+        Group test = new Group("tit","desc",1,4,"free","vote", "open"
+                ,0,5);
+        Group test2 = new Group("tit2","desc2",3,4,"free","vote", "open"
+                ,1,7);
+        List<Group> testList = new ArrayList<>();
+        testList.add(test);
+        testList.add(test2);
+        MutableLiveData<List<Group>> groups = new MutableLiveData<>();
+        groups.setValue(testList);
+        return groups;
+//        return allGroups;
     }
-
 }

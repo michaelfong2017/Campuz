@@ -9,27 +9,36 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.michael.campuz.R;
+import com.michael.campuz.data.group.Group;
+import com.michael.campuz.ui.GroupAdapter;
 import com.michael.campuz.ui.member.group.GroupThread;
 import com.michael.campuz.ui.member.group.GroupViewModel;
 import com.michael.campuz.ui.view.GroupThreadView;
 import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
-public class MemberGroupActivity extends AppCompatActivity {
+@AndroidEntryPoint
+public class GroupActivity extends AppCompatActivity {
 
     private GroupViewModel groupViewModel;
 
     private LinearLayout scrollLinear;
 
     private int currentThreadId = 3;
+
+    private static final int OPEN_GROUP_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +48,21 @@ public class MemberGroupActivity extends AppCompatActivity {
         Logger.i("Logged-in");
 
         /** Initialize UI elements **/
-        scrollLinear = findViewById(R.id.group_scroll_linear);
+
+        /** RecyclerView **/
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        final GroupAdapter adapter = new GroupAdapter();
+        recyclerView.setAdapter(adapter);
 
         /** ViewModel **/
         groupViewModel = new ViewModelProvider(this).get(GroupViewModel.class);
-        groupViewModel.getGroupThreads().observe(this, new Observer<List<GroupThread>>() {
+        groupViewModel.getAllGroups().observe(this, new Observer<List<Group>>() {
             @Override
-            public void onChanged(List<GroupThread> groupThreads) {
-                Logger.d(groupThreads);
-                if (groupThreads == null || groupThreads.size() == 0) {
-                    return;
-                }
-                scrollLinear.addView(createThread(groupThreads.get(groupThreads.size()-1).getTitle(), groupThreads.get(groupThreads.size()-1).getStatus(), String.valueOf(groupThreads.get(groupThreads.size()-1).getNumberOfComments())));
-
-
+            public void onChanged(@Nullable List<Group> groups) {
+                adapter.setGroups(groups);
             }
         });
 
@@ -69,7 +79,7 @@ public class MemberGroupActivity extends AppCompatActivity {
                         Logger.d(menuItem);
                         switch (menuItem.getItemId()) {
                             case R.id.navigation_discussion: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberDiscussionActivity.class);
+                                Intent intent = new Intent(GroupActivity.this, MemberDiscussionActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 break;
@@ -78,13 +88,13 @@ public class MemberGroupActivity extends AppCompatActivity {
                                 break;
                             }
                             case R.id.navigation_resources: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberResourcesActivity.class);
+                                Intent intent = new Intent(GroupActivity.this, MemberResourcesActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 break;
                             }
                             case R.id.navigation_notifications: {
-                                Intent intent = new Intent(MemberGroupActivity.this, MemberNotificationsActivity.class);
+                                Intent intent = new Intent(GroupActivity.this, MemberNotificationsActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 break;
@@ -110,8 +120,8 @@ public class MemberGroupActivity extends AppCompatActivity {
                         break;
                     case R.id.option_add:
 //                        groupViewModel.createThread("hi", "open", 5);
-                        Intent intent = new Intent(MemberGroupActivity.this, OpenGroupActivity.class);
-                        startActivity(intent);
+                        Intent intent = new Intent(GroupActivity.this, OpenGroupActivity.class);
+                        startActivityForResult(intent, OPEN_GROUP_REQUEST_CODE);
 
                         break;
                     default:
@@ -132,6 +142,28 @@ public class MemberGroupActivity extends AppCompatActivity {
         super.onStop();
 //        groupViewModel.saveGroupThreads();
 //        Logger.d(groupViewModel.getGroupThreads());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == OPEN_GROUP_REQUEST_CODE && resultCode == RESULT_OK) {
+            String title = data.getStringExtra(OpenGroupActivity.EXTRA_TITLE);
+            String description = data.getStringExtra(OpenGroupActivity.EXTRA_DESCRIPTION);
+            String from = data.getStringExtra(OpenGroupActivity.EXTRA_FROM);
+            String to = data.getStringExtra(OpenGroupActivity.EXTRA_TO);
+            String joinMode = data.getStringExtra(OpenGroupActivity.EXTRA_JOIN_MODE);
+            String kickMode = data.getStringExtra(OpenGroupActivity.EXTRA_KICK_MODE);
+
+            Logger.d(title);
+            Logger.d(description);
+            Logger.d(from);
+            Logger.d(to);
+            Logger.d(joinMode);
+            Logger.d(kickMode);
+
+        }
     }
 
     public GroupThreadView createThread(String title, String status, String numberOfComments) {

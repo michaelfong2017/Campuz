@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.michael.campuz.ui.guest.GuestDiscussionActivity;
-import com.michael.campuz.ui.member.MemberDiscussionActivity;
+import com.michael.campuz.ui.member.GroupActivity;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        };
 
-        Intent intent = new Intent(MainActivity.this, GuestDiscussionActivity.class);
+        Intent intent = new Intent(MainActivity.this, GroupActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
