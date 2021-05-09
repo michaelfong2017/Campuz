@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.michael.campuz.R;
 import com.michael.campuz.data.Result;
 import com.michael.campuz.data.group.Group;
+import com.michael.campuz.data.group.GroupReply;
 import com.michael.campuz.data.group.GroupRepository;
 import com.michael.campuz.data.model.LoggedInUser;
 import com.michael.campuz.ui.view.GroupThreadView;
@@ -28,42 +29,51 @@ public class GroupViewModel extends ViewModel {
     private final SavedStateHandle savedStateHandle;
     private final GroupRepository repository;
 
-    private MutableLiveData<List<Group>> allGroups;
+    private LiveData<List<Group>> allGroups;
+    private LiveData<List<GroupReply>> allGroupReplies;
 
     @Inject
     public GroupViewModel(SavedStateHandle savedStateHandle, GroupRepository repository) {
         this.savedStateHandle = savedStateHandle;
         this.repository = repository;
-        this.allGroups = new MutableLiveData<>(new ArrayList<>());
+        allGroups = repository.getAllGroups();
+        allGroupReplies = repository.getAllGroupReplies();
     }
 
+    /** Group **/
     public void insert(Group group) {
-//        repository.insert(group);
-        List<Group> old = allGroups.getValue();
-        old.add(group);
-        allGroups.setValue(old);
+        repository.insert(group);
     }
-//    public void update(Group group) {
-//        repository.update(group);
-//    }
-//    public void delete(Group group) {
-//        repository.delete(group);
-//    }
-//    public void deleteAllGroups() {
-//        repository.deleteAllGroups();
-//    }
+    public void update(Group group) {
+        repository.update(group);
+    }
+    public void delete(Group group) {
+        repository.delete(group);
+    }
+    public void deleteAllGroups() {
+        repository.deleteAllGroups();
+    }
     public LiveData<List<Group>> getAllGroups() {
-//        Group test = new Group("tit","desc",1,4,"free","vote", "open"
-//                ,0,5);
-//        Group test2 = new Group("tit2","desc2",3,4,"free","vote", "open"
-//                ,1,7);
-//        List<Group> testList = new ArrayList<>();
-//        testList.add(test);
-//        testList.add(test2);
-//        testList.add(test2);
-//        testList.add(test2);
-//
-//        allGroups.setValue(testList);
         return allGroups;
+    }
+    public LiveData<Group> getGroupById(int id) {
+        return repository.getGroupById(id);
+    }
+
+    /** GroupReply **/
+    public void insertReply(GroupReply groupReply) {
+        repository.insertReply(groupReply);
+    }
+    public void updateReply(GroupReply groupReply) {
+        repository.updateReply(groupReply);
+    }
+    public void deleteReply(GroupReply groupReply) {
+        repository.deleteReply(groupReply);
+    }
+    public void deleteAllGroupReplies() {
+        repository.deleteAllGroupReplies();
+    }
+    public LiveData<List<GroupReply>> getAllGroupReplies() {
+        return allGroupReplies;
     }
 }

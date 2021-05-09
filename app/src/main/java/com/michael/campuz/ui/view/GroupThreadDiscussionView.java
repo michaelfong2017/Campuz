@@ -1,8 +1,6 @@
 package com.michael.campuz.ui.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -40,7 +38,7 @@ public class GroupThreadDiscussionView extends LinearLayout {
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.group_thread_discussion_layout,this);
+        LayoutInflater.from(context).inflate(R.layout.group_reply_item,this);
     }
 
     public void setNumber(String number) {

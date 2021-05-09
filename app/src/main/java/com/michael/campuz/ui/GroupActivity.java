@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.michael.campuz.R;
 import com.michael.campuz.data.group.Group;
+import com.michael.campuz.data.group.GroupReply;
 import com.michael.campuz.ui.login.LoginActivity;
 import com.michael.campuz.ui.group.GroupViewModel;
 import com.orhanobut.logger.Logger;
@@ -60,6 +61,9 @@ public class GroupActivity extends AppCompatActivity {
                 adapter.setGroups(groups);
             }
         });
+
+//        groupViewModel.deleteAllGroups();
+//        groupViewModel.deleteAllGroupReplies();
 
         /** Drawer **/
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -171,6 +175,9 @@ public class GroupActivity extends AppCompatActivity {
                             "Open", 0, 1);
 
                     groupViewModel.insert(group);
+
+                    GroupReply groupReply = new GroupReply(group.getId(), 1, "Michael Fong", description);
+                    groupViewModel.insertReply(groupReply);
                 }
                 break;
         }
